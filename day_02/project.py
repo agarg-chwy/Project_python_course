@@ -60,7 +60,7 @@ def normalize_input(text):
         normalize_input("PATROL") should return "patrol"
     """
     # TODO: Use .strip() and .lower() to clean the input
-    pass
+    return text.lower().strip()
 
 
 def check_battery_level(level):
@@ -80,8 +80,10 @@ def check_battery_level(level):
         check_battery_level(20) should return True
     """
     # TODO: Return True if level >= 20, False otherwise
-    pass
-
+    if level >=20:
+        return True
+    else:
+        return False
 
 def check_sensor_status(status):
     """
@@ -100,7 +102,11 @@ def check_sensor_status(status):
         check_sensor_status("error") should return False
     """
     # TODO: Return True if status is "online", False otherwise
-    pass
+    status = status.lower()
+    if status == "online":
+        return True
+    else:
+        return False
 
 
 def check_operation_mode(mode):
@@ -124,7 +130,15 @@ def check_operation_mode(mode):
         check_operation_mode("dance") should return "standby"
     """
     # TODO: Use if/elif/else to return the correct mode
-    pass
+    mode = mode.lower()
+    if mode == "patrol":
+        return "patrol"
+    elif mode == "charge":
+        return "charge"
+    elif mode == "maintenance":
+        return "maintenance"
+    else:
+        return "standby"
 
 
 def get_startup_result(battery_level, sensor_status, operation_mode):
@@ -163,5 +177,41 @@ def get_startup_result(battery_level, sensor_status, operation_mode):
     
     # TODO: Normalize operation_mode and check using check_operation_mode()
     # Return the appropriate message based on the mode
+   
+   
     
-    pass
+    battery = check_battery_level(battery_level)
+    sensor = check_sensor_status(sensor_status)
+    operation = check_operation_mode(operation_mode)
+
+
+    if battery == False:
+        return "Battery Critical, Shutting Down"
+
+    if sensor == False:
+        return "Sensor Offline, Cannot operate safely"
+
+    if operation == "patrol":
+        return "Patrol mode activated. Robot operational."
+
+    if operation == "charge":
+        return "Returning to charging station."
+
+    if operation == "maintenance":
+        return "Maintenance mode. Motors disabled."
+    
+    if operation != "patrol" and operation != "charge" and operation != "maintenance":
+        return "Unknown mode. Standby activated."
+
+    
+
+
+
+
+   
+
+    
+
+
+
+    
