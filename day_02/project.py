@@ -60,7 +60,8 @@ def normalize_input(text):
         normalize_input("PATROL") should return "patrol"
     """
     # TODO: Use .strip() and .lower() to clean the input
-    pass
+    text = input ("Enter the text:")
+    return text.lower().strip()
 
 
 def check_battery_level(level):
@@ -80,8 +81,11 @@ def check_battery_level(level):
         check_battery_level(20) should return True
     """
     # TODO: Return True if level >= 20, False otherwise
-    pass
-
+    level = int (input("Enter battery level (0-100):"))
+    if level >=20:
+        return True
+    else:
+        return False
 
 def check_sensor_status(status):
     """
@@ -100,7 +104,11 @@ def check_sensor_status(status):
         check_sensor_status("error") should return False
     """
     # TODO: Return True if status is "online", False otherwise
-    pass
+    status = input ("Enter the status of the sensor: online, offline or error. ").lower()
+    if status == "online":
+        return True
+    else:
+        return False
 
 
 def check_operation_mode(mode):
@@ -124,7 +132,15 @@ def check_operation_mode(mode):
         check_operation_mode("dance") should return "standby"
     """
     # TODO: Use if/elif/else to return the correct mode
-    pass
+    mode = input ("Choose the mode you want to activate: patrol, charge, maintenance, standby ").lower()
+    if mode == "patrol":
+        return "patrol"
+    elif mode == "charge":
+        return "charge"
+    elif mode == "maintenance":
+        return "maintenance"
+    else:
+        return "standby"
 
 
 def get_startup_result(battery_level, sensor_status, operation_mode):
@@ -163,5 +179,11 @@ def get_startup_result(battery_level, sensor_status, operation_mode):
     
     # TODO: Normalize operation_mode and check using check_operation_mode()
     # Return the appropriate message based on the mode
-    
-    pass
+   
+    battery = (check_battery_level(battery_level))
+    current = check_sensor_status(sensor_status)
+    mode = check_operation_mode(operation_mode)
+
+    if battery < 20:
+        return "Battery critical. Shutting down."
+
