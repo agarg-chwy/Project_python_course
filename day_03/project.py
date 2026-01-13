@@ -67,7 +67,7 @@ def get_random_waypoint(waypoints):
     Hint: Use random.choice()
     """
     # TODO: Use random.choice() to return a random waypoint
-    pass
+    return(random.choice(waypoints))
 
 
 def shuffle_route(waypoints):
@@ -88,8 +88,9 @@ def shuffle_route(waypoints):
     Hint: Make a copy first, then use random.shuffle() on the copy
     """
     # TODO: Create a copy of the list, shuffle it, and return it
-    pass
-
+    original_list = waypoints.copy()
+    random.shuffle(original_list)
+    return original_list
 
 def generate_patrol_route(waypoints, num_stops):
     """
@@ -110,7 +111,10 @@ def generate_patrol_route(waypoints, num_stops):
     Hint: Use a for loop with range() and random.choice()
     """
     # TODO: Use a for loop to build a list of num_stops random waypoints
-    pass
+    my_list = []
+    for i in range (num_stops):
+        my_list.append(random.choice(waypoints))
+    return my_list
 
 
 def calculate_total_steps(route):
@@ -130,7 +134,12 @@ def calculate_total_steps(route):
     Hint: Use a for loop to add up the steps from each waypoint
     """
     # TODO: Use a for loop to sum all the steps values
-    pass
+    total_steps = 0
+    for i in route:
+        total_steps += i[1]
+    return total_steps
+
+
 
 
 def format_route_report(route):
@@ -153,5 +162,18 @@ def format_route_report(route):
     """
     # TODO: Use a for loop to build a formatted string
     # Each line should be "Stop X: Name (Y steps)"
-    pass
+
+    my_string = ""
+    for i in range(len(route)):
+        x = route[i]
+        x0 = x [0]  #this is lab string
+        x1 = x [1]  # this is the step int
+        my_string = my_string + f"Stop {i + 1}: {x0} {x1} steps) \n"
+    
+    return my_string
+
+        #print(f"Stop 1: ", new_list[0])
+
+
+
 
