@@ -74,7 +74,14 @@ def create_robot_config(name, motor_count, sensor_count, battery_wh):
          "sensors": {}, "battery_wh": 100, "sensor_count": 3}
     """
     # TODO: Create and return the robot config dictionary
-    pass
+    robot={}
+    robot["name"] = name
+    robot["motors"] = {"count": motor_count, "power_per_motor": 25}
+    robot["sensors"] = {}
+    robot["battery_wh"] = battery_wh
+    robot["sensor_count"] = sensor_count
+    return robot 
+
 
 
 def get_total_power_draw(robot):
@@ -96,8 +103,10 @@ def get_total_power_draw(robot):
     Hint: Access nested dict with robot["motors"]["count"]
     """
     # TODO: Calculate and return motor_count * power_per_motor
-    pass
-
+    x = robot["motors"]["count"]
+    y = robot["motors"]["power_per_motor"]
+    get_total_power_draw = x * y
+    return get_total_power_draw
 
 def add_sensor(robot, sensor_name, sensor_range):
     """
@@ -119,8 +128,8 @@ def add_sensor(robot, sensor_name, sensor_range):
     Hint: robot["sensors"][sensor_name] = sensor_range
     """
     # TODO: Add the sensor to robot["sensors"] and return robot
-    pass
-
+    robot["sensors"][sensor_name] = sensor_range
+    return robot
 
 def find_robot_by_name(fleet, name):
     """
@@ -141,8 +150,9 @@ def find_robot_by_name(fleet, name):
     Hint: Loop through fleet and check each robot["name"]
     """
     # TODO: Loop through fleet and return matching robot
-    pass
-
+    for robot_name in fleet:
+        if robot_name["name"] == name:
+            return robot_name
 
 def get_fleet_summary(fleet):
     """
@@ -170,8 +180,16 @@ def get_fleet_summary(fleet):
     Hint: Use a loop to sum up the values
     """
     # TODO: Calculate and return the fleet summary dictionary
-    pass
 
+    total_battery_wh = 0
+    total_robots = 0
+    total_motors = 0
+
+    for robot in fleet:
+        total_robots = total_robots + 1
+        total_battery_wh += robot["battery_wh"]
+        total_motors += robot["motors"]["count"]
+    return {"total_robots": total_robots, "total_battery_wh": total_battery_wh, "total_motors": total_motors}
 
 def get_most_capable_robot(fleet):
     """
@@ -195,5 +213,16 @@ def get_most_capable_robot(fleet):
     Hint: Track the best robot as you loop through
     """
     # TODO: Find and return the name of the robot with most sensors
-    pass
+    highest_sensor_count = 0
+    x = ""
+    if len(fleet) == 0:
+        return None
+    for robot in fleet:
+        if robot["sensor_count"] > highest_sensor_count:
+            highest_sensor_count = robot["sensor_count"]
+            x = robot["name"]
+        elif robot["sensor_count"] == highest_sensor_count:
+            continue
+    return x
+
 
